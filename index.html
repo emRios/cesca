@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CESCA - Centro de Estudios Superiores de Cultura y Apologética. Formación de posgrado que integra pensamiento social, político, económico e histórico desde una perspectiva cristiana reformista.">
+    <meta name="keywords" content="CESCA, Apologética, Cultura, Posgrado, Guatemala, Teología Reformada, Pensamiento Crítico, Educación Superior">
+    <meta name="author" content="CESCA">
+    <title>CESCA | Centro de Estudios Superiores de Cultura y Apologética</title>
+    
+    <!-- Favicon (Placeholder) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏛️</text></svg>">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Vue.js 3 CDN -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app" v-cloak>
+        <!-- Navigation -->
+        <header :class="{ 'scrolled': isScrolled }">
+            <div class="container nav-container">
+                <div class="logo">
+                    <a href="#">
+                        <!-- Logo oficial CESCA -->
+                        <img src="CESCA/logoCESCA.png" alt="CESCA - Centro de Estudios Superiores de Cultura y Apologética" class="logo-img">
+                        <div class="logo-text-group">
+                            <span class="logo-text">CESCA</span>
+                            <span class="logo-sub">Cultura & Apologética</span>
+                        </div>
+                    </a>
+                </div>
+                
+                <button class="mobile-menu-btn" @click="toggleMenu" aria-label="Menú">
+                    <i :class="isMenuOpen ? 'fas fa-times' : 'fas fa-bars'"></i>
+                </button>
+
+                <nav :class="{ 'active': isMenuOpen }">
+                    <ul>
+                        <li v-for="(item, index) in menuItems" :key="index">
+                            <a :href="item.link" @click="closeMenu">{{ item.text }}</a>
+                        </li>
+                        <li><a href="#contacto" class="btn-nav" @click="closeMenu">Aplicar</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section id="inicio" class="hero">
+            <div class="hero-overlay"></div>
+            <div class="container hero-content">
+                <h1 class="fade-in-up">Fe que piensa, pensamiento que transforma.</h1>
+                <p class="fade-in-up delay-1">Dios es aquello mayor que lo cual nada puede ser pensado.</p>
+                <p class="hero-quote-ref fade-in-up delay-1">Anselmo de Canterbury</p>
+                <div class="hero-buttons fade-in-up delay-2">
+                    <a href="#programas" class="btn btn-primary">Explorar Programas</a>
+                    <a href="#sobre-cesca" class="btn btn-outline">Conocer CESCA</a>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </section>
+
+        <!-- Sobre CESCA -->
+        <section id="sobre-cesca" class="section-padding bg-light">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="subtitle">Nuestra Identidad</span>
+                    <h2>Pensamiento Critico</h2>
+                    <div class="divider"></div>
+                </div>
+                
+                <div class="grid-2">
+                    <div class="about-text">
+                        <p class="lead">CESCA nace como una respuesta intelectual y espiritual a la confusión cultural de nuestro tiempo.</p>
+                        <p>No somos solo una institución académica; somos un centro de resistencia intelectual. Integramos teología, filosofía, economía e historia para desafiar los clichés religiosos y políticos que han estancado el progreso real.</p>
+                        
+                        <div class="features-list">
+                            <div class="feature-item">
+                                <i class="fas fa-brain"></i>
+                                <div>
+                                    <h4>Rigor Intelectual</h4>
+                                    <p>Análisis crítico lejos del conformismo académico.</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-church"></i>
+                                <div>
+                                    <h4>Fe Reformada</h4>
+                                    <p>Una visión del mundo que abarca toda la realidad.</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-balance-scale"></i>
+                                <div>
+                                    <h4>Ética de Libertad</h4>
+                                    <p>Defensa de órdenes espontáneos y responsabilidad individual.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="about-image">
+                        <img src="images/Nuestra Identidad.png" alt="Nuestra Identidad CESCA">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Programas Académicos -->
+        <section id="programas" class="section-padding bg-dark text-white">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="subtitle text-gold">Oferta Académica</span>
+                    <h2>Formación de Alto Nivel</h2>
+                    <div class="divider divider-gold"></div>
+                </div>
+
+                <div class="programs-grid">
+                    <div class="program-card" v-for="(program, index) in programs" :key="index">
+                        <div class="program-icon">
+                            <i :class="program.icon"></i>
+                        </div>
+                        <h3>{{ program.title }}</h3>
+                        <p>{{ program.description }}</p>
+                        <ul class="program-details">
+                            <li v-for="detail in program.details"><i class="fas fa-check text-gold"></i> {{ detail }}</li>
+                        </ul>
+                        <a href="#contacto" class="btn btn-text">Más Información <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pensamiento CESCA (Blog/Artículos) -->
+        <section id="pensamiento" class="section-padding">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="subtitle">Biblioteca de Ideas</span>
+                    <h2>Pensamiento CESCA</h2>
+                    <div class="divider"></div>
+                </div>
+
+                <div class="grid-3">
+                    <article class="blog-card" v-for="(article, index) in articles" :key="index">
+                        <div class="blog-img">
+                            <img v-if="article.image" :src="article.image" :alt="article.title">
+                            <div v-else class="img-placeholder-sm"></div>
+                        </div>
+                        <div class="blog-content">
+                            <span class="category">{{ article.category }}</span>
+                            <h3>{{ article.title }}</h3>
+                            <p>{{ article.excerpt }}</p>
+                            <a href="#" class="read-more">Leer Ensayo</a>
+                        </div>
+                    </article>
+                </div>
+                
+                <div class="text-center mt-5">
+                    <a href="#" class="btn btn-secondary">Ver Todo el Material</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recursos & Eventos -->
+        <section id="recursos" class="section-padding bg-grey">
+            <div class="container">
+                <div class="grid-2-uneven">
+                    <div class="events-column">
+                        <h3><i class="far fa-calendar-alt text-gold"></i> Próximos Eventos</h3>
+                        <div class="event-list">
+                            <div class="event-item" v-for="(event, index) in events" :key="index">
+                                <div class="event-date">
+                                    <i :class="event.icon" style="font-size: 1.5rem; color: var(--color-blue-deep);"></i>
+                                </div>
+                                <div class="event-info">
+                                    <h4>{{ event.title }}</h4>
+                                    <p>{{ event.description }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="resources-column">
+                        <h3><i class="fas fa-book-reader text-gold"></i> Recursos Destacados</h3>
+                        <div class="resource-highlight">
+                            <h4>Apologética en el Siglo XXI</h4>
+                            <p>Accede a nuestra última conferencia magistral sobre la relevancia de la fe en la plaza pública.</p>
+                            <a href="#" class="btn btn-primary btn-sm">Ver Conferencia</a>
+                        </div>
+                        <div class="resource-links mt-4">
+                            <a href="#" class="resource-link"><i class="fas fa-microphone"></i> Podcast CESCA</a>
+                            <a href="#" class="resource-link"><i class="fas fa-file-pdf"></i> Papers Académicos</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contacto -->
+        <section id="contacto" class="section-padding bg-blue-deep text-white">
+            <div class="container">
+                <div class="grid-2">
+                    <div class="contact-info">
+                        <h2>Únete a la Conversación</h2>
+                        <p class="mb-4">Si buscas una formación que desafíe tu intelecto y fortalezca tu fe, CESCA es tu lugar. Escríbenos para más información sobre admisiones y programas.</p>
+                        
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt text-gold"></i>
+                            <p>Ciudad de Guatemala, Guatemala</p>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope text-gold"></i>
+                            <p>info@cesca.edu.gt</p>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone text-gold"></i>
+                            <p>+502 2222-0000</p>
+                        </div>
+                        
+                        <div class="social-links mt-4">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-form-wrapper">
+                        <form @submit.prevent="submitForm" class="contact-form">
+                            <div class="form-group">
+                                <label>Nombre Completo</label>
+                                <input type="text" v-model="form.name" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Correo Electrónico</label>
+                                <input type="email" v-model="form.email" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Interés Académico</label>
+                                <select v-model="form.interest">
+                                    <option value="maestria">Maestría en Apologética</option>
+                                    <option value="cursos">Cursos Libres</option>
+                                    <option value="eventos">Eventos y Conferencias</option>
+                                    <option value="otro">Otro</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Mensaje</label>
+                                <textarea v-model="form.message" rows="4"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-gold btn-block">Enviar Mensaje</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-logo">
+                        <h3>CESCA</h3>
+                        <p>Centro de Estudios Superiores de Cultura y Apologética</p>
+                    </div>
+                    <div class="footer-links">
+                        <a href="#inicio">Inicio</a>
+                        <a href="#sobre-cesca">Nosotros</a>
+                        <a href="#programas">Programas</a>
+                        <a href="#pensamiento">Blog</a>
+                    </div>
+                    <div class="footer-legal">
+                        <p>&copy; {{ new Date().getFullYear() }} CESCA. Todos los derechos reservados.</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- App Logic -->
+    <script src="js/app.js"></script>
+</body>
+</html>
